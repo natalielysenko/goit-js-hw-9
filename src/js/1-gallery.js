@@ -64,28 +64,28 @@
     description: 'Lighthouse Coast Sea',
     },
    ];
-   const gallery = document.querySelector(`.gallery`);
+const gallery = document.querySelector(`.gallery`);
+const fragment = document.createDocumentFragment();
 
+images.forEach(({ preview, original, description }) => {
+   const li = document.createElement('li');
+   li.classList.add('gallery-item');
+ 
+   const link = document.createElement('a');
+   link.classList.add('gallery-link');
+   link.href = original;
+ 
+   const img = document.createElement('img');
+   img.classList.add('gallery-image');
+   img.src = preview;
+   img.alt = description;
+ 
+   link.appendChild(img);
+   li.appendChild(link);
+   fragment.appendChild(li);
+ });
    gallery.innerHTML = '';
-   
-   images.forEach(({ preview, original, description }) => {
-       const li = document.createElement('li');
-       li.classList.add('gallery-item');
-     
-       const link = document.createElement('a');
-       link.classList.add('gallery-link');
-       link.href = original;
-     
-       const img = document.createElement('img');
-       img.classList.add('gallery-image');
-       img.src = preview;
-       img.setAttribute('data-source', original);
-       img.alt = description;
-     
-       link.appendChild(img);
-       li.appendChild(link);
-       gallery.appendChild(li);
-     });
+   gallery.appendChild(fragment);
   
      new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
